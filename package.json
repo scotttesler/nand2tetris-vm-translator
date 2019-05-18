@@ -1,0 +1,32 @@
+{
+  "author": {
+    "email": "scottiet123@gmail.com",
+    "name": "Scott Tesler",
+    "url": "https://scotttesler.com"
+  },
+  "bin": {
+    "nand2tetris-vm-translator": "./index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/scotttesler/nand2tetris-vm-translator/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "logurt": "^3.0.0"
+  },
+  "description": "VM Translator for the Nand2Tetris Coursera class.",
+  "homepage": "https://github.com/scotttesler/nand2tetris-vm-translator#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "nand2tetris-vm-translator",
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/scotttesler/nand2tetris-vm-translator.git"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "test": ""
+  },
+  "version": "1.0.0"
+}
