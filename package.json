@@ -5,14 +5,13 @@
     "url": "https://scotttesler.com"
   },
   "bin": {
-    "nand2tetris-vm-translator": "./index.js"
+    "nand2tetris-vm-translator": "./VMTranslator.js"
   },
   "bugs": {
     "url": "https://github.com/scotttesler/nand2tetris-vm-translator/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.11",
-    "logurt": "^3.0.0"
+    "uuid": "^3.3.2"
   },
   "description": "VM Translator for the Nand2Tetris Coursera class.",
   "homepage": "https://github.com/scotttesler/nand2tetris-vm-translator#readme",
