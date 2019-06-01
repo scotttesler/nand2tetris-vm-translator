@@ -1,75 +1,65 @@
-const STACK_OPERATION_POP = "pop";
-const STACK_OPERATION_PUSH = "push";
+const {
+  ARITHMETIC_OPERATIONS,
+  ASM,
+  FUNCTION_OPERATIONS,
+  PROGRAM_FLOW_OPERATIONS,
+  STACK_OPERATIONS
+} = require("./constants");
 
+const _forEach = require("lodash/forEach");
+const _values = require("lodash/values");
 const translateArithmeticOperation = require("./translate-arithmetic-operation");
-const translateStackPop = require("./translate-stack-pop");
-const translateStackPush = require("./translate-stack-push");
+const translateFunctionOperation = require("./translate-function-operation");
+const translateProgramFlowOperation = require("./translate-program-flow-operation");
+const translateStackOperation = require("./translate-stack-operation");
 
-function main(vmCode = [], filenameWithoutExtension = "") {
+function main(vmCodeArr, filename) {
+  const arithmeticOperations = new Set(_values(ARITHMETIC_OPERATIONS));
+  const functionOperations = new Set(_values(FUNCTION_OPERATIONS));
+  const programFlowOperations = new Set(_values(PROGRAM_FLOW_OPERATIONS));
+  const stackOperations = new Set(_values(STACK_OPERATIONS));
   let asmCode = [];
-  let line;
+  let lineParts;
+  let operation;
 
-  for (let iVmCode = 0; iVmCode < vmCode.length; iVmCode++) {
-    line = vmCode[iVmCode].split(" ");
-    const [operation, memorySegment, num] = line;
+  _forEach(vmCodeArr, line => {
+    lineParts = line.split(" ");
+    operation = lineParts[0];
 
-    asmCode.push(`// ${line.join(" ")}`);
+    asmCode = asmCode.concat([`// ${line}`, ""]);
 
-    if (line.length === 1) {
+    if (arithmeticOperations.has(operation)) {
       asmCode = translateArithmeticOperation(asmCode, operation);
-    } else if (line.length === 3) {
+    } else if (functionOperations.has(operation)) {
+      asmCode = translateFunctionOperation(
+        asmCode,
+        operation,
+        lineParts[1],
+        lineParts[2],
+        filename
+      );
+    } else if (stackOperations.has(operation)) {
       asmCode = translateStackOperation(
         asmCode,
         operation,
-        memorySegment,
-        num,
-        filenameWithoutExtension
+        lineParts[1],
+        lineParts[2],
+        filename
       );
-    }
-  }
-
-  asmCode = asmCode.concat([
-    `(END)
-@END
-0;JMP
-`
-  ]);
-
-  return asmCode;
-}
-
-function translateStackOperation(
-  asmCode,
-  operation,
-  memorySegment,
-  num,
-  filenameWithoutExtension
-) {
-  switch (operation) {
-    case STACK_OPERATION_POP:
-      asmCode = translateStackPop(
+    } else if (programFlowOperations.has(operation)) {
+      asmCode = translateProgramFlowOperation(
         asmCode,
-        memorySegment,
-        num,
-        filenameWithoutExtension
+        operation,
+        lineParts[1],
+        filename
       );
-
-      break;
-    case STACK_OPERATION_PUSH:
-      asmCode = translateStackPush(
-        asmCode,
-        memorySegment,
-        num,
-        filenameWithoutExtension
-      );
-
-      break;
-    default:
+    } else {
       console.error("Asm code successfully created so far:", asmCode);
-      throw new Error(`Invalid stack operation: ${operation}.`);
-  }
+      throw new Error(`Invalid operation: ${operation}.`);
+    }
+  });
 
-  return asmCode;
+  return asmCode.concat([ASM.END]);
 }
 
 module.exports = main;

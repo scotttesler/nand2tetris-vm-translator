@@ -1,85 +1,69 @@
-const MEMORY_SEGMENT_ARGUMENT = "argument";
-const MEMORY_SEGMENT_LOCAL = "local";
-const MEMORY_SEGMENT_POINTER = "pointer";
-const MEMORY_SEGMENT_STATIC = "static";
-const MEMORY_SEGMENT_TEMP = "temp";
-const MEMORY_SEGMENT_THAT = "that";
-const MEMORY_SEGMENT_THIS = "this";
+const { ASM, MEMORY_SEGMENTS, RAM_BASES, RAM_POINTERS } = require("./constants");
 
-const RAM_STACK_PTR = "R0";
-const RAM_LCL_PTR = "R1";
-const RAM_ARG_PTR = "R2";
-const RAM_THIS_PTR = "R3";
-const RAM_THAT_PTR = "R4";
-
-const RAM_TEMP_BASE = "5";
-
-function main(asmCode, memorySegment, num, filenameWithoutExtension) {
-  asmCode = asmCode.concat([`@${RAM_STACK_PTR}`, "M=M-1;"]);
+function main(asmCode, memorySegment, num, filename) {
+  asmCode = asmCode.concat([`@${RAM_POINTERS.STACK}`, "M=M-1;"]);
 
   switch (memorySegment) {
-    case MEMORY_SEGMENT_ARGUMENT:
+    case MEMORY_SEGMENTS.ARGUMENT:
       asmCode = asmCode.concat([
         `@${num}
 D=A;
 
-@${RAM_ARG_PTR}
+@${RAM_POINTERS.ARGUMENT}
 D=M+D;
 @tempPtr
 M=D;
 
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M;
 D=M;
 
 @tempPtr
 A=M;
-M=D;
-`
+M=D;`
       ]);
 
       break;
-    case MEMORY_SEGMENT_LOCAL:
+    case MEMORY_SEGMENTS.LOCAL:
       asmCode = asmCode.concat([
         `@${num}
 D=A;
 
-@${RAM_LCL_PTR}
+@${RAM_POINTERS.LOCAL}
 D=M+D;
 @tempPtr
 M=D;
 
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M;
 D=M;
 
 @tempPtr
 A=M;
-M=D;
-`
+M=D;`
       ]);
 
       break;
-    case MEMORY_SEGMENT_POINTER:
+    case MEMORY_SEGMENTS.POINTER:
       switch (num) {
         case "0":
           asmCode = asmCode.concat([
-            `@${RAM_STACK_PTR}
+            `@${RAM_POINTERS.STACK}
 A=M
 D=M;
 
-@${RAM_THIS_PTR}
+@${RAM_POINTERS.THIS}
 M=D;`
           ]);
 
           break;
         case "1":
           asmCode = asmCode.concat([
-            `@${RAM_STACK_PTR}
+            `@${RAM_POINTERS.STACK}
 A=M
 D=M;
 
-@${RAM_THAT_PTR}
+@${RAM_POINTERS.THAT}
 M=D;`
           ]);
 
@@ -92,77 +76,74 @@ M=D;`
       }
 
       break;
-    case MEMORY_SEGMENT_STATIC:
+    case MEMORY_SEGMENTS.STATIC:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 A=M;
 D=M;
 
-@${filenameWithoutExtension}.${num}
+@${filename}.${num}
 M=D;`
       ]);
 
       break;
-    case MEMORY_SEGMENT_TEMP:
+    case MEMORY_SEGMENTS.TEMP:
       asmCode = asmCode.concat([
         `@${num}
 D=A;
 
-@${RAM_TEMP_BASE}
+@${RAM_BASES.TEMP}
 D=A+D;
 @tempPtr
 M=D;
 
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M;
 D=M;
 
 @tempPtr
 A=M;
-M=D;
-`
+M=D;`
       ]);
 
       break;
-    case MEMORY_SEGMENT_THAT:
+    case MEMORY_SEGMENTS.THAT:
       asmCode = asmCode.concat([
         `@${num}
 D=A;
 
-@${RAM_THAT_PTR}
+@${RAM_POINTERS.THAT}
 D=M+D;
 @tempPtr
 M=D;
 
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M;
 D=M;
 
 @tempPtr
 A=M;
-M=D;
-`
+M=D;`
       ]);
 
       break;
-    case MEMORY_SEGMENT_THIS:
+    case MEMORY_SEGMENTS.THIS:
       asmCode = asmCode.concat([
         `@${num}
 D=A;
 
-@${RAM_THIS_PTR}
+@${RAM_POINTERS.THIS}
 D=M+D;
 @tempPtr
 M=D;
 
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M;
 D=M;
 
 @tempPtr
 A=M;
-M=D;
-`
+M=D;`
       ]);
 
       break;

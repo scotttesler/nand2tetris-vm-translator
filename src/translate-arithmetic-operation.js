@@ -1,14 +1,4 @@
-const ARITHMETIC_OPERATION_ADD = "add";
-const ARITHMETIC_OPERATION_AND = "and";
-const ARITHMETIC_OPERATION_EQUIVALENT = "eq";
-const ARITHMETIC_OPERATION_GREATER_THAN = "gt";
-const ARITHMETIC_OPERATION_LESS_THAN = "lt";
-const ARITHMETIC_OPERATION_NEGATE = "neg";
-const ARITHMETIC_OPERATION_NOT = "not";
-const ARITHMETIC_OPERATION_OR = "or";
-const ARITHMETIC_OPERATION_SUBTRACT = "sub";
-
-const RAM_STACK_PTR = "R0";
+const { ARITHMETIC_OPERATIONS, RAM_POINTERS } = require("./constants");
 
 const uuidv4 = require("uuid/v4");
 
@@ -16,9 +6,9 @@ function main(asmCode, operation) {
   const uuid = uuidv4();
 
   switch (operation) {
-    case ARITHMETIC_OPERATION_ADD:
+    case ARITHMETIC_OPERATIONS.ADD:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
@@ -28,9 +18,9 @@ M=M+D;`
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_AND:
+    case ARITHMETIC_OPERATIONS.AND:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
@@ -40,9 +30,9 @@ M=M&D;`
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_EQUIVALENT:
+    case ARITHMETIC_OPERATIONS.EQUIVALENT:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
@@ -54,14 +44,14 @@ D=M-D;
 D;JEQ
 
 (EQ_SET_TO_FALSE_${uuid})
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M-1;
 M=0;
 @EQ_END_${uuid}
 0;JMP
 
 (EQ_SET_TO_TRUE_${uuid})
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M-1;
 M=-1;
 @EQ_END_${uuid}
@@ -71,9 +61,9 @@ M=-1;
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_GREATER_THAN:
+    case ARITHMETIC_OPERATIONS.GREATER_THAN:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
@@ -85,14 +75,14 @@ D=M-D;
 D;JGT
 
 (EQ_SET_TO_FALSE_${uuid})
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M-1;
 M=0;
 @EQ_END_${uuid}
 0;JMP
 
 (EQ_SET_TO_TRUE_${uuid})
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M-1;
 M=-1;
 @EQ_END_${uuid}
@@ -102,9 +92,9 @@ M=-1;
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_LESS_THAN:
+    case ARITHMETIC_OPERATIONS.LESS_THAN:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
@@ -116,14 +106,14 @@ D=M-D;
 D;JLT
 
 (EQ_SET_TO_FALSE_${uuid})
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M-1;
 M=0;
 @EQ_END_${uuid}
 0;JMP
 
 (EQ_SET_TO_TRUE_${uuid})
-@${RAM_STACK_PTR}
+@${RAM_POINTERS.STACK}
 A=M-1;
 M=-1;
 @EQ_END_${uuid}
@@ -133,25 +123,25 @@ M=-1;
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_NEGATE:
+    case ARITHMETIC_OPERATIONS.NEGATE:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 A=M-1;
 M=-M;`
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_NOT:
+    case ARITHMETIC_OPERATIONS.NOT:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 A=M-1;
 M=!M;`
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_OR:
+    case ARITHMETIC_OPERATIONS.OR:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
@@ -161,9 +151,9 @@ M=M|D;`
       ]);
 
       break;
-    case ARITHMETIC_OPERATION_SUBTRACT:
+    case ARITHMETIC_OPERATIONS.SUBTRACT:
       asmCode = asmCode.concat([
-        `@${RAM_STACK_PTR}
+        `@${RAM_POINTERS.STACK}
 M=M-1;
 A=M;
 D=M;
