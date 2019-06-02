@@ -11,6 +11,7 @@
     "url": "https://github.com/scotttesler/nand2tetris-vm-translator/issues"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "uuid": "^3.3.2"
   },
   "description": "VM Translator for the Nand2Tetris Coursera class.",

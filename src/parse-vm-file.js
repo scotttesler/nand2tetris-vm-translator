@@ -1,9 +1,11 @@
 const fs = require("fs");
-const COMMENT_PREFIX = "//";
 
-function main(filename = "") {
+const COMMENT_PREFIX = "//";
+const FILE_ENCODING = "utf8";
+
+function main(filePath) {
   return fs
-    .readFileSync(filename, "utf8")
+    .readFileSync(filePath, FILE_ENCODING)
     .split(/[\r\n]+/)
     .reduce((acc, val) => {
       let str = val.replace(/\s/g, " ");
