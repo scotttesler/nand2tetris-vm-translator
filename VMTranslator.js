@@ -3,9 +3,7 @@
 const {
   ASM,
   BOOTSTRAP_FILENAME,
-  RAM_BASES,
-  RAM_POINTERS,
-  VM_FILE_EXTENSION
+  VM_FILE_EXTENSION,
 } = require("./src/constants");
 
 const _forEach = require("lodash/forEach");
@@ -23,7 +21,7 @@ function main() {
   let asmCode = [];
 
   if (fs.lstatSync(cmdLineArg).isDirectory()) {
-    _forEach(fs.readdirSync(cmdLineArg), filename => {
+    _forEach(fs.readdirSync(cmdLineArg), (filename) => {
       asmCode = generateAsmFromVmFile(
         asmCode,
         `${path.resolve(cmdLineArg)}/${filename}`

@@ -3,29 +3,14 @@ const { STACK_OPERATIONS } = require("./constants");
 const translateStackPop = require("./translate-stack-pop");
 const translateStackPush = require("./translate-stack-push");
 
-function main(
-  asmCode,
-  operation,
-  memorySegment,
-  num,
-  filename) {
+function main(asmCode, operation, memorySegment, num, filename) {
   switch (operation) {
     case STACK_OPERATIONS.POP:
-      asmCode = translateStackPop(
-        asmCode,
-        memorySegment,
-        num,
-        filename
-      );
+      asmCode = translateStackPop(asmCode, memorySegment, num, filename);
 
       break;
     case STACK_OPERATIONS.PUSH:
-      asmCode = translateStackPush(
-        asmCode,
-        memorySegment,
-        num,
-        filename
-      );
+      asmCode = translateStackPush(asmCode, memorySegment, num, filename);
 
       break;
     default:

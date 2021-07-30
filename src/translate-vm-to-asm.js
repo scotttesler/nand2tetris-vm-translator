@@ -3,7 +3,7 @@ const {
   ASM,
   FUNCTION_OPERATIONS,
   PROGRAM_FLOW_OPERATIONS,
-  STACK_OPERATIONS
+  STACK_OPERATIONS,
 } = require("./constants");
 
 const _forEach = require("lodash/forEach");
@@ -22,7 +22,7 @@ function main(vmCodeArr, filename) {
   let lineParts;
   let operation;
 
-  _forEach(vmCodeArr, line => {
+  _forEach(vmCodeArr, (line) => {
     lineParts = line.split(" ");
     operation = lineParts[0];
 

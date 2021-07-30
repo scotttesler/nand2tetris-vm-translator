@@ -7,7 +7,7 @@ function main(asmCode, operation, label, filename) {
     case PROGRAM_FLOW_OPERATIONS.GOTO:
       asmCode = asmCode.concat([
         `@${asmLabel}
-0;JMP`
+0;JMP`,
       ]);
 
       break;
@@ -18,7 +18,7 @@ M=M-1;
 A=M;
 D=M;
 @${asmLabel}
-D;JNE`
+D;JNE`,
       ]);
 
       break;
@@ -28,9 +28,7 @@ D;JNE`
       break;
     default:
       console.error("Asm code successfully created so far:", asmCode);
-      throw new Error(
-        `Invalid program flow operation: ${operation}.`
-      );
+      throw new Error(`Invalid program flow operation: ${operation}.`);
   }
 
   return asmCode.concat([""]);

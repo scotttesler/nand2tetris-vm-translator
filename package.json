@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "uuid": "^3.3.2"
+    "uuid": "^8.3.2"
   },
   "description": "VM Translator for the Nand2Tetris Coursera class.",
   "homepage": "https://github.com/scotttesler/nand2tetris-vm-translator#readme",

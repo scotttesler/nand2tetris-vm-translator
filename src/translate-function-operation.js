@@ -52,7 +52,7 @@ M=D;
 @${functionName}
 0;JMP
 
-(${retAddr})`
+(${retAddr})`,
       ]);
 
       break;
@@ -91,7 +91,7 @@ M=M+1;
 @LOOP-${uuid}
 0;JMP
 
-(LOOP-${uuid}-END)`
+(LOOP-${uuid}-END)`,
       ]);
 
       break;
@@ -171,7 +171,7 @@ M=D;
   // goto RET
 @retAddr
 A=M;
-0;JMP`
+0;JMP`,
       ]);
 
       break;

@@ -2,7 +2,7 @@ const {
   ASM,
   MEMORY_SEGMENTS,
   RAM_BASES,
-  RAM_POINTERS
+  RAM_POINTERS,
 } = require("./constants");
 
 function main(asmCode, memorySegment, num, filename) {
@@ -16,7 +16,7 @@ D=A;
 A=M+D;
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;
@@ -25,7 +25,7 @@ ${ASM.SAVE_D_TO_STACK}`
         `@${num}
 D=A;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;
@@ -38,7 +38,7 @@ D=A;
 A=M+D;
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;
@@ -49,7 +49,7 @@ ${ASM.SAVE_D_TO_STACK}`
             `@${RAM_POINTERS.THIS}
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
           ]);
 
           break;
@@ -58,7 +58,7 @@ ${ASM.SAVE_D_TO_STACK}`
             `@${RAM_POINTERS.THAT}
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
           ]);
 
           break;
@@ -75,7 +75,7 @@ ${ASM.SAVE_D_TO_STACK}`
         `@${filename}.${num}
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;
@@ -88,7 +88,7 @@ D=A;
 A=A+D;
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;
@@ -101,7 +101,7 @@ D=A;
 A=M+D;
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;
@@ -114,7 +114,7 @@ D=A;
 A=M+D;
 D=M;
 
-${ASM.SAVE_D_TO_STACK}`
+${ASM.SAVE_D_TO_STACK}`,
       ]);
 
       break;

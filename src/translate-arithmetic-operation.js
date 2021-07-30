@@ -14,7 +14,7 @@ A=M;
 D=M;
 
 A=A-1;
-M=M+D;`
+M=M+D;`,
       ]);
 
       break;
@@ -26,7 +26,7 @@ A=M;
 D=M;
 
 A=A-1;
-M=M&D;`
+M=M&D;`,
       ]);
 
       break;
@@ -57,7 +57,7 @@ M=-1;
 @EQ_END_${uuid}
 0;JMP
 
-(EQ_END_${uuid})`
+(EQ_END_${uuid})`,
       ]);
 
       break;
@@ -88,7 +88,7 @@ M=-1;
 @EQ_END_${uuid}
 0;JMP
 
-(EQ_END_${uuid})`
+(EQ_END_${uuid})`,
       ]);
 
       break;
@@ -119,7 +119,7 @@ M=-1;
 @EQ_END_${uuid}
 0;JMP
 
-(EQ_END_${uuid})`
+(EQ_END_${uuid})`,
       ]);
 
       break;
@@ -127,7 +127,7 @@ M=-1;
       asmCode = asmCode.concat([
         `@${RAM_POINTERS.STACK}
 A=M-1;
-M=-M;`
+M=-M;`,
       ]);
 
       break;
@@ -135,7 +135,7 @@ M=-M;`
       asmCode = asmCode.concat([
         `@${RAM_POINTERS.STACK}
 A=M-1;
-M=!M;`
+M=!M;`,
       ]);
 
       break;
@@ -147,7 +147,7 @@ A=M;
 D=M;
 
 A=A-1;
-M=M|D;`
+M=M|D;`,
       ]);
 
       break;
@@ -159,7 +159,7 @@ A=M;
 D=M;
 
 A=A-1;
-M=M-D;`
+M=M-D;`,
       ]);
 
       break;

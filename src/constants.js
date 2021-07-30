@@ -7,7 +7,7 @@ const RAM_POINTERS = {
   LOCAL: "R1",
   STACK: "R0",
   THIS: "R3",
-  THAT: "R4"
+  THAT: "R4",
 };
 
 const ASM = {
@@ -23,7 +23,7 @@ M=D;`,
 A=M;
 M=D;
 @${RAM_POINTERS.STACK}
-M=M+1;`
+M=M+1;`,
 };
 
 const ARITHMETIC_OPERATIONS = {
@@ -35,13 +35,13 @@ const ARITHMETIC_OPERATIONS = {
   NEGATE: "neg",
   NOT: "not",
   OR: "or",
-  SUBTRACT: "sub"
+  SUBTRACT: "sub",
 };
 
 const FUNCTION_OPERATIONS = {
   CALL: "call",
   FUNCTION: "function",
-  RETURN: "return"
+  RETURN: "return",
 };
 
 const MEMORY_SEGMENTS = {
@@ -52,13 +52,13 @@ const MEMORY_SEGMENTS = {
   STATIC: "static",
   TEMP: "temp",
   THAT: "that",
-  THIS: "this"
+  THIS: "this",
 };
 
 const PROGRAM_FLOW_OPERATIONS = {
   GOTO: "goto",
   IF_GOTO: "if-goto",
-  LABEL: "label"
+  LABEL: "label",
 };
 
 const STACK_OPERATIONS = { POP: "pop", PUSH: "push" };

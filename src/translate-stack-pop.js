@@ -1,4 +1,9 @@
-const { ASM, MEMORY_SEGMENTS, RAM_BASES, RAM_POINTERS } = require("./constants");
+const {
+  ASM,
+  MEMORY_SEGMENTS,
+  RAM_BASES,
+  RAM_POINTERS,
+} = require("./constants");
 
 function main(asmCode, memorySegment, num, filename) {
   asmCode = asmCode.concat([`@${RAM_POINTERS.STACK}`, "M=M-1;"]);
@@ -20,7 +25,7 @@ D=M;
 
 @tempPtr
 A=M;
-M=D;`
+M=D;`,
       ]);
 
       break;
@@ -40,7 +45,7 @@ D=M;
 
 @tempPtr
 A=M;
-M=D;`
+M=D;`,
       ]);
 
       break;
@@ -53,7 +58,7 @@ A=M
 D=M;
 
 @${RAM_POINTERS.THIS}
-M=D;`
+M=D;`,
           ]);
 
           break;
@@ -64,7 +69,7 @@ A=M
 D=M;
 
 @${RAM_POINTERS.THAT}
-M=D;`
+M=D;`,
           ]);
 
           break;
@@ -83,7 +88,7 @@ A=M;
 D=M;
 
 @${filename}.${num}
-M=D;`
+M=D;`,
       ]);
 
       break;
@@ -103,7 +108,7 @@ D=M;
 
 @tempPtr
 A=M;
-M=D;`
+M=D;`,
       ]);
 
       break;
@@ -123,7 +128,7 @@ D=M;
 
 @tempPtr
 A=M;
-M=D;`
+M=D;`,
       ]);
 
       break;
@@ -143,7 +148,7 @@ D=M;
 
 @tempPtr
 A=M;
-M=D;`
+M=D;`,
       ]);
 
       break;
